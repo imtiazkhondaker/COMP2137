@@ -1,0 +1,32 @@
+---Host/Student info----
+
+Running on Sun Nov  2 01:04:11 PM EST 2025
+Run by imtiaz-khondaker - () on host
+ Static hostname: generic-vm
+      Machine ID: a83b244bbd9b43588ca7db076d020b74
+Operating System: Ubuntu 24.04.3 LTS
+a98742121b14ebe6350c4bf8245d0062  ./check-assign2-script.sh - a98742121b14ebe6350c4bf8245d0062  -
+------------------------
+
+---Start of Assignment2.sh Check------
+---Running makecontainers.sh----------
+This script performs many tasks. Please be patient
+To see more about what it is doing as it does it, use the --verbose option
+You may ignore any messages about Open vSwitch or dpkg-preconfigure being unable to re-open stdin
+DO NOT use control-Z when this script is running.
+Network lan deleted
+Network mgmt deleted
+Network lan created
+Network mgmt created
+Launching openwrt
+Retrieving image: Unpack: 100% (1.26GB/s)                                          Retrieving image: Unpack: 100% (1.26GB/s)                                          Launching server1
+Retrieving image: Unpack: 100% (1.17GB/s)                                          Retrieving image: Unpack: 100% (1.17GB/s)                                          inactive
+Pushing /home/imtiaz-khondaker/.ssh/id_ed25519.pub to /home/remoteadmin/.ssh/id_ed25519.pub: 100% (284.85MB/s)                                                                                                               Waiting for server1 restart
+please let the script finish
+# Host server1-mgmt found: line 4
+# Host server1-mgmt found: line 5
+# Host server1-mgmt found: line 6
+/home/imtiaz-khondaker/.ssh/known_hosts updated.
+Original contents retained as /home/imtiaz-khondaker/.ssh/known_hosts.old
+---Retrieving assignment2.sh script---
+Failed to retrieve assignment2.sh script using URL 'https://github.com/imtiazkhondaker/COMP2137/raw/main/assignment2.sh'
