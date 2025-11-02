@@ -1,6 +1,6 @@
 ---Host/Student info----
 
-Running on Sun Nov  2 01:04:11 PM EST 2025
+Running on Sun Nov  2 01:19:17 PM EST 2025
 Run by imtiaz-khondaker - () on host
  Static hostname: generic-vm
       Machine ID: a83b244bbd9b43588ca7db076d020b74
@@ -19,14 +19,177 @@ Network mgmt deleted
 Network lan created
 Network mgmt created
 Launching openwrt
-Retrieving image: Unpack: 100% (1.26GB/s)                                          Retrieving image: Unpack: 100% (1.26GB/s)                                          Launching server1
-Retrieving image: Unpack: 100% (1.17GB/s)                                          Retrieving image: Unpack: 100% (1.17GB/s)                                          inactive
-Pushing /home/imtiaz-khondaker/.ssh/id_ed25519.pub to /home/remoteadmin/.ssh/id_ed25519.pub: 100% (284.85MB/s)                                                                                                               Waiting for server1 restart
-please let the script finish
-# Host server1-mgmt found: line 4
-# Host server1-mgmt found: line 5
-# Host server1-mgmt found: line 6
-/home/imtiaz-khondaker/.ssh/known_hosts updated.
-Original contents retained as /home/imtiaz-khondaker/.ssh/known_hosts.old
+Retrieving image: Unpack: 100% (1.29GB/s)                                          Retrieving image: Unpack: 100% (1.29GB/s)                                          Launching server1
+Retrieving image: Unpack: 100% (1.13GB/s)                                          Retrieving image: Unpack: 100% (1.13GB/s)                                          inactive
+Pushing /home/imtiaz-khondaker/.ssh/id_ed25519.pub to /home/remoteadmin/.ssh/id_ed25519.pub: 100% (180.42MB/s)                                                                                                               Waiting for server1 restart
 ---Retrieving assignment2.sh script---
-Failed to retrieve assignment2.sh script using URL 'https://github.com/imtiazkhondaker/COMP2137/raw/main/assignment2.sh'
+Retrieved assignment2 script
+Copied assignment2.sh script to server1
+---assignment2.sh run----
+-------------------------
+
+--network--------
+/etc/hosts
+-----------------------
+127.0.0.1	localhost
+::1		localhost ip6-localhost ip6-loopback
+ff02::1		ip6-allnodes
+ff02::2		ip6-allrouters
+
+
+192.168.16.241 server1
+172.16.1.241 server1-mgmt
+192.168.16.2 openwrt
+172.16.1.2 openwrt-mgmt
+
+-------------
+/etc/netplan/10-lxc.yaml
+-----------------------
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses: [192.168.16.241/24]
+            routes:
+              - to: default
+                via: 192.168.16.2
+            nameservers:
+                addresses: [192.168.16.2]
+                search: [home.arpa, localdomain]
+        eth1:
+            addresses: [172.16.1.241/24]
+-------------
+---applying netplan---
+---ip a---------------
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+74: eth0@if75: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 00:16:3e:f5:9a:43 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 192.168.16.241/24 brd 192.168.16.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::216:3eff:fef5:9a43/64 scope link 
+       valid_lft forever preferred_lft forever
+76: eth1@if77: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 00:16:3e:00:96:f9 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 172.16.1.241/24 brd 172.16.1.255 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::216:3eff:fe00:96f9/64 scope link 
+       valid_lft forever preferred_lft forever
+--ip r----------------
+default via 192.168.16.2 dev eth0 proto static 
+172.16.1.0/24 dev eth1 proto kernel scope link src 172.16.1.241 
+192.168.16.0/24 dev eth0 proto kernel scope link src 192.168.16.241 
+----------------------
+
+---services status------
+------------------------
+
+---ufw show added-------
+---ufw show status------
+------------------------
+
+---getents--------------------
+sudo:x:27:ubuntu
+---user home dir contents-----
+   561557      4 -rw-------   1 root     root           94 Nov  2 18:19 /home/remoteadmin/.ssh/authorized_keys
+   560419      4 -rw-r--r--   1 root     ubuntu         94 Nov  2 18:19 /home/remoteadmin/.ssh/id_ed25519.pub
+   561749      4 -rw-r--r--   1 root     remoteadmin     3771 Jan  6  2022 /home/remoteadmin/.bashrc
+   561730      0 -rw-r--r--   1 root     root               0 Nov  2 18:20 /home/remoteadmin/.cache/motd.legal-displayed
+   561732      0 -rwxr-xr-x   1 root     remoteadmin        0 Nov  2 18:20 /home/remoteadmin/assignment2.sh
+   561750      4 -rw-r--r--   1 root     remoteadmin      220 Jan  6  2022 /home/remoteadmin/.bash_logout
+   561754      4 -rw-r--r--   1 root     remoteadmin      807 Jan  6  2022 /home/remoteadmin/.profile
+   542583      4 -rw-r--r--   1 ubuntu   ubuntu          3771 Jan  6  2022 /home/ubuntu/.bashrc
+   542582      4 -rw-r--r--   1 ubuntu   ubuntu           220 Jan  6  2022 /home/ubuntu/.bash_logout
+   542584      4 -rw-r--r--   1 ubuntu   ubuntu           807 Jan  6  2022 /home/ubuntu/.profile
+/home/remoteadmin/.ssh/authorized_keys
+-----------------------
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPiv+8vM09vJuVvbCiXB/Q/ZlouxkcLgUSF15ih7hdIC COMP2137 key
+-------------
+------------------------------
+
+---assignment2.sh rerun--------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+--network--------
+/etc/hosts
+-----------------------
+127.0.0.1	localhost
+::1		localhost ip6-localhost ip6-loopback
+ff02::1		ip6-allnodes
+ff02::2		ip6-allrouters
+
+
+192.168.16.241 server1
+172.16.1.241 server1-mgmt
+192.168.16.2 openwrt
+172.16.1.2 openwrt-mgmt
+
+-------------
+/etc/netplan/10-lxc.yaml
+-----------------------
+network:
+    version: 2
+    ethernets:
+        eth0:
+            addresses: [192.168.16.241/24]
+            routes:
+              - to: default
+                via: 192.168.16.2
+            nameservers:
+                addresses: [192.168.16.2]
+                search: [home.arpa, localdomain]
+        eth1:
+            addresses: [172.16.1.241/24]
+-------------
+---applying netplan---
+---ip a---------------
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+74: eth0@if75: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 00:16:3e:f5:9a:43 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 192.168.16.241/24 brd 192.168.16.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::216:3eff:fef5:9a43/64 scope link 
+       valid_lft forever preferred_lft forever
+76: eth1@if77: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 00:16:3e:00:96:f9 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 172.16.1.241/24 brd 172.16.1.255 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::216:3eff:fe00:96f9/64 scope link 
+       valid_lft forever preferred_lft forever
+--ip r----------------
+default via 192.168.16.2 dev eth0 proto static 
+172.16.1.0/24 dev eth1 proto kernel scope link src 172.16.1.241 
+192.168.16.0/24 dev eth0 proto kernel scope link src 192.168.16.241 
+----------------------
+
+---services status------
+------------------------
+
+---getents--------------------
+sudo:x:27:ubuntu
+---user home dir contents-----
+   561557      4 -rw-------   1 root     root           94 Nov  2 18:19 /home/remoteadmin/.ssh/authorized_keys
+   560419      4 -rw-r--r--   1 root     ubuntu         94 Nov  2 18:19 /home/remoteadmin/.ssh/id_ed25519.pub
+   561749      4 -rw-r--r--   1 root     remoteadmin     3771 Jan  6  2022 /home/remoteadmin/.bashrc
+   561730      0 -rw-r--r--   1 root     root               0 Nov  2 18:20 /home/remoteadmin/.cache/motd.legal-displayed
+   561732      0 -rwxr-xr-x   1 root     remoteadmin        0 Nov  2 18:20 /home/remoteadmin/assignment2.sh
+   561750      4 -rw-r--r--   1 root     remoteadmin      220 Jan  6  2022 /home/remoteadmin/.bash_logout
+   561754      4 -rw-r--r--   1 root     remoteadmin      807 Jan  6  2022 /home/remoteadmin/.profile
+   542583      4 -rw-r--r--   1 ubuntu   ubuntu          3771 Jan  6  2022 /home/ubuntu/.bashrc
+   542582      4 -rw-r--r--   1 ubuntu   ubuntu           220 Jan  6  2022 /home/ubuntu/.bash_logout
+   542584      4 -rw-r--r--   1 ubuntu   ubuntu           807 Jan  6  2022 /home/ubuntu/.profile
+/home/remoteadmin/.ssh/authorized_keys
+-----------------------
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPiv+8vM09vJuVvbCiXB/Q/ZlouxkcLgUSF15ih7hdIC COMP2137 key
+-------------
+------------------------------
+
